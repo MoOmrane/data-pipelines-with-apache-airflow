@@ -27,16 +27,21 @@ with DAG(
 
         # Download all pictures in launches.json
         launches_path = pathlib.Path("/tmp/launches.json")
-        launches = json.loads(launches_path.read_text())
-
+        with open(launches_path, "r") as f:
+            launches = json.load(f)
+        # Retrieve the images URLs
         image_urls = [launch["image"] for launch in launches["results"]]
+
         for image_url in image_urls:
             try:
-                response = requests.get(image_url)
-                image_filename = image_url.split("/")[-1]
-                target_file = images_dir / image_filename
-                target_file.write_bytes(response.content)
-                print(f"Downloaded {image_url} to {target_file}")
+                response = requests.get(image_url, timeout=20)
+                response.raise_for_status()
+                image_filename = pathlib.Path(image_url).name
+                target_file = images_dir.joinpath(image_filename)
+                # Writing image to disk
+                with open(target_file, "wb") as f:
+                    f.write(response.content)
+                    print(f"Downloaded {image_url} to {target_file}")
             except requests_exceptions.MissingSchema:
                 print(f"{image_url} appears to be an invalid URL.")
             except requests_exceptions.ConnectionError:
