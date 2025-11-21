@@ -1,23 +1,18 @@
 # Data Pipelines with Apache Airflow
 
-Code accompanying the Manning book [Data Pipelines with Apache Airflow](https://www.manning.com/books/data-pipelines-with-apache-airflow).
+This repository builds upon the original code examples by adding modern implementations adapted for **Apache Airflow 3**. It serves as a bridge between the concepts presented in the book and the latest Airflow practices.
 
 ### Structure
 
 Overall, this repository is structured as follows:
 
 ```
-├── chapter01                # Code examples for Chapter 1.
-├── chapter02                # Code examples for Chapter 2.
+├── chapter01                # Original code examples for Chapter 1.
+├── chapter01_airflow3       # Airflow 3 implementation for Chapter 1.
+├── chapter02                # Original code examples for Chapter 2.
+├── chapter02_airflow3       # Airflow 3 implementation for Chapter 2.
 ├── ...
-├── .pre-commit-config.yaml  # Pre-commit config for the CI.
-├── CHANGELOG.md             # Changelog detailing updates to the code.
-├── LICENSE                  # Code license.
-├── README.md                # This readme.
-└── requirements.txt         # CI dependencies.
 ```
-
-The *chapterXX* directories contain the code examples for each specific Chapter.
 
 Code for each Chapter is generally structured something like follows:
 
@@ -29,6 +24,4 @@ Code for each Chapter is generally structured something like follows:
 
 ### Usage
 
-Details for running specific chapter examples are available in the corresponding chapter's readme. In general, most code examples are run using docker-compose, together with the provided docker-compose.yml file in each chapter. This docker-compose file will take care of spinning up the required resources and start an Airflow instance for you. Once everything is running, you should be able to run the examples in Airflow using your local browser.
-
-Some later Chapters (such as Chapters 11 and 13) may require a bit more setup. The details for doing so are described in the corresponding readme's and in the Chapter's themselves.
+Details for running specific chapter examples are available in the corresponding chapter's readme.
